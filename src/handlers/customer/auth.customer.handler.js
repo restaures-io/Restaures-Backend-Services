@@ -3,7 +3,7 @@ import {
   ControllerResponse,
   ErrorHandler,
 } from "../../utils/customResponse.js";
-import Customer from "../../models/customer.js";
+import Customer from "../../models/Customer.js";
 import { verifyPassword, hashPassword } from "../../utils/encryption.js";
 import { createNewRefreshToken } from "../../services/common/refresh.token.service.js";
 import {

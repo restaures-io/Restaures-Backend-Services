@@ -1,4 +1,4 @@
-import Customer from "../../models/customer.js";
+import Customer from "../../models/Customer.js";
 
 export async function findCustomerByEmail(email) {
   return await Customer.findOne({ email });
