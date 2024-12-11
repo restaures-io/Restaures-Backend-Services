@@ -1,4 +1,4 @@
-import RefreshToken from "../../models/refreshToken.js";
+import RefreshToken from "../../models/RefreshToken.js";
 
 export async function deleteRefreshToken(req) {
   await RefreshToken.findOneAndDelete({ token: req.body.refresh_token });
