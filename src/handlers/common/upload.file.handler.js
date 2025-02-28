@@ -20,10 +20,10 @@ export const uploadFile = BigPromise(async (req, res) => {
       data,
       metadata,
       contentType ?? "image/jpeg",
-      fileName ?? uuidv4()
+      uuidv4()
     );
   }
-  const dataList = req.files.files;
+  const dataList = Array.isArray(req.files.files) ? req.files.files : [req.files.files];
   let fileUrls = [];
   if (dataList) {
     console.log(dataList);
@@ -36,7 +36,7 @@ export const uploadFile = BigPromise(async (req, res) => {
           data,
           metadata,
           contentType ?? "image/jpeg",
-          fileName ?? uuidv4()
+          uuidv4()
         )
       );
     }

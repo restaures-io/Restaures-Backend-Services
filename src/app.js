@@ -10,6 +10,8 @@ import admin from "./controllers/customer/customer.controllers.js";
 import refreshToken from "./controllers/common/refresh.token.controller.js";
 import restaurant from "./controllers/restaurant/restaurant.controllers.js";
 import uploadFile from "./controllers/common/upload.file.controller.js";
+import menu from "./controllers/common/menu.controller.js";
+
 import morgan from "morgan";
 
 // initialze app instance----------
@@ -29,6 +31,7 @@ app.use("/documentation", swaggerUi.serve, swaggerUi.setup(openApiSpec));
 app.use("/api/customer", admin);
 app.use("/api", refreshToken);
 app.use("/api", uploadFile);
+app.use("/api", menu);
 app.use("/api/restaurant", restaurant);
 
 export default app;
