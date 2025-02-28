@@ -5,6 +5,10 @@ import {
   registerCustomerSchema,
 } from "../validations/customer/auth.customer.schemas.js";
 import {
+  addMenuItemSchema,
+
+} from "../validations/restaurant/menu.restaurant.schema.js";
+import {
   loginRestaurantSchema,
   registerRestaurantSchema,
 } from "../validations/restaurant/auth.restaurant.schemas.js";
@@ -224,6 +228,141 @@ const openApiSpec = createDocument({
         },
       },
     },
+    // Menu
+    "/api/restaurant/menu": {
+      post: {
+        tags: ["Menu"],
+        summary: "Add Menu",
+        security: [
+          {
+            BearerAuth: [],
+          },
+        ],
+        requestBody: {
+          content: {
+            "application/json": {
+              schema: addMenuItemSchema,
+            },
+          },
+        },
+        responses: {
+          200: {
+            description: "Success",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+
+    // get
+    "/api/menu": {
+      get: {
+        tags: ["Menu"],
+        summary: "Get Menu",
+        security: [
+          {
+            BearerAuth: [],
+          },
+        ],
+        responses: {
+          200: {
+            description: "Success",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+
+    // get by id
+    "/api/menu/{id}": {
+      get: {
+        tags: ["Menu"],
+        summary: "Get Menu By Id",
+        security: [
+          {
+            BearerAuth: [],
+          },
+        ],
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        responses: {
+          200: {
+            description: "Success",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+
+    // get by restaurant id
+    "/api/menu/restaurant/{restaurant_id}": {
+      get: {
+        tags: ["Menu"],
+        summary: "Get Menu By Restaurant Id",
+        security: [
+          {
+            BearerAuth: [],
+          },
+        ],
+        parameters: [
+          {
+            name: "restaurant_id",
+            in: "path",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        responses: {
+          200: {
+            description: "Success",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+
   },
 });
 

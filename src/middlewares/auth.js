@@ -5,7 +5,6 @@ import JwtService from "../utils/jwt.service.js";
 const auth = BigPromise(async (req, res, next) => {
   // get header
   const authHeader = req.headers.authorization;
-
   if (!authHeader) {
     return ControllerResponse(res, 400, null, "unAuthorized");
   }

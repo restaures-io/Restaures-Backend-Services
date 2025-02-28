@@ -49,8 +49,14 @@ const menuItemSchema = z.object({
     example:
       "A delicious starter made from marinated paneer grilled to perfection.",
   }),
+  images: z.array(z.string()).optional().openapi({
+    example: ["https://example.com/paneer-tikka.jpg"],
+  }),
   price: z.number().positive("Price must be a positive number").openapi({
     example: 250,
+  }),
+  timeToPrepare: z.number().positive("Time to prepare must be a positive number").openapi({
+    example: 20,
   }),
   category: z
     .enum(["Starter", "Main Course", "Dessert", "Beverage", "Others"])
