@@ -110,7 +110,9 @@ export const registerRestaurantSchema = z.object({
     }),
   location: locationSchema,
   workingDays: z.array(workingDaysSchema),
-  menu: z.array(menuItemSchema),
+  images: z.array(z.string()).optional().openapi({
+    example: ["https://imgs.search.brave.com/TCg2-DrIqlJ2uEbMMFRhjg2eJssXutF3qI4AsNevg6Q/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvNTMw/MzgwODA1L3Bob3Rv/L2V1cm9wZWFuLXJl/c3RhdXJhbnQtaW4t/YnJpZ2h0LWNvbG9y/cy5qcGc_cz02MTJ4/NjEyJnc9MCZrPTIw/JmM9WmhmSVZNclZH/NFAwcTVVNU9QOW0z/eUMxT3BiRWRFNzF5/WnBJNnp5c0NuVT0"],
+  }),
   owner: ownerSchema,
   panNumber: z.string().min(1, "PAN number is required").openapi({
     example: "ABCDE1234F",
