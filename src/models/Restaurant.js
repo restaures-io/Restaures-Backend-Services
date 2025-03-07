@@ -28,11 +28,6 @@ const restaurantSchema = new Schema(
       ref: "WorkingDay",
       required: true,
     },
-    menu: {
-      type: [Schema.Types.ObjectId],
-      ref: "Menu",
-      required: true,
-    },
     owner: {
       type: Schema.Types.ObjectId,
       ref: "RestaurantOwner",
@@ -53,6 +48,16 @@ const restaurantSchema = new Schema(
     },
     fssaiRegistrationNumber: {
       type: String,
+      required: true,
+    },
+    // Unique value array of customer ids 
+    favoriteBy: {
+      type: [Schema.Types.ObjectId],
+      ref: "Customer",
+      default: [],
+    },
+    images: {
+      type: [String],
       required: true,
     },
   },

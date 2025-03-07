@@ -49,7 +49,10 @@ export const getMenu = BigPromise(async (req, res) => {
 
 export const getMenuItemById = BigPromise(async (req, res) => {
     const { id } = req.params;
-    const menuItem = await Menu.findById(id);
+    const menuItem = await Menu.findById(id).populate("restaurant_id",
+        "_id name"
+
+    );
     if (!menuItem) {
         return ErrorHandler(res, "Menu item not found", 404);
     }

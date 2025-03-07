@@ -2,7 +2,6 @@ import JwtService from "../../utils/jwt.service.js";
 import Restaurant from "../../models/Restaurant.js";
 import Location from "../../models/Location.js";
 import WorkingDays from "../../models/WorkingDays.js";
-import Menu from "../../models/Menu.js";
 import RestaurantOwner from "../../models/RestaurantOwner.js";
 import BankDetails from "../../models/BankDetails.js";
 import BigPromise from "../../utils/bigPromise.js";
@@ -20,7 +19,7 @@ export const register = BigPromise(async (req, res) => {
     name,
     location,
     workingDays,
-    menu,
+    images,
     owner,
     panNumber,
     gstinNumber,
@@ -54,7 +53,6 @@ export const register = BigPromise(async (req, res) => {
     const workingDaysDoc = await WorkingDays.insertMany(workingDays, {
       session,
     });
-    const menuDocs = await Menu.insertMany(menu, { session });
     const ownerDoc = await RestaurantOwner.create([owner], { session });
     const bankDetailsDoc = await BankDetails.create([bankDetails], { session });
 
@@ -63,9 +61,9 @@ export const register = BigPromise(async (req, res) => {
       name,
       location: locationDoc[0]._id,
       workingDays: workingDaysDoc.map((item) => item._id),
-      menu: menuDocs.map((item) => item._id),
       owner: ownerDoc[0]._id,
       panNumber,
+      images,
       gstinNumber,
       bankDetails: bankDetailsDoc[0]._id,
       fssaiRegistrationNumber,
@@ -112,8 +110,6 @@ export const register = BigPromise(async (req, res) => {
       refresh_token,
     });
   } catch (error) {
-    // Abort the transaction in case of an error
-    await session.abortTransaction();
     session.endSession();
     return ErrorHandler(res, error.message, 500);
   }

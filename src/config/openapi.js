@@ -12,6 +12,7 @@ import {
   loginRestaurantSchema,
   registerRestaurantSchema,
 } from "../validations/restaurant/auth.restaurant.schemas.js";
+import { addEnquirySchema, updateEnquiryStatusSchema } from "../validations/restaurant/enquiry.restaurant.schema.js";
 
 const openApiSpec = createDocument({
   openapi: "3.0.0",
@@ -362,8 +363,291 @@ const openApiSpec = createDocument({
         },
       },
     },
+    "/api/customer/restaurant": {
+      get: {
+        tags: ["Customer"],
+        summary: "Get Restaurant",
+        security: [
+          {
+            BearerAuth: [],
+          },
+        ],
+        responses: {
+          200: {
+            description: "Success",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+    "/api/customer/restaurant/{id}": {
+      get: {
+        tags: ["Customer"],
+        summary: "Get Restaurant By Id",
+        security: [
+          {
+            BearerAuth: [],
+          },
+        ],
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        responses: {
+          200: {
+            description: "Success",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+    "/api/customer/favorite/restaurant/{restaurant_id}": {
+      put: {
+        tags: ["Customer"],
+        summary: "Add Favorite Restaurant",
+        security: [
+          {
+            BearerAuth: [],
+          },
+        ],
+        parameters: [
+          {
+            name: "restaurant_id",
+            in: "path",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        responses: {
+          200: {
+            description: "Success",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+      delete: {
+        tags: ["Customer"],
+        summary: "Delete Favorite Restaurant",
+        security: [
+          {
+            BearerAuth: [],
+          },
+        ],
+        parameters: [
+          {
+            name: "restaurant_id",
+            in: "path",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        responses: {
+          200: {
+            description: "Success",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+    "/api/customer/favorite/restaurant": {
+      get: {
+        tags: ["Customer"],
+        summary: "Get Favorite Restaurants",
+        security: [
+          {
+            BearerAuth: [],
+          },
+        ],
+        responses: {
+          200: {
+            description: "Success",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+    "/api/customer/enquiry": {
+      post: {
+        tags: ["Customer"],
+        summary: "Add Enquiry",
+        security: [
+          {
+            BearerAuth: [],
+          },
+        ],
+        requestBody: {
+          content: {
+            "application/json": {
+              schema: addEnquirySchema,
+            },
+          },
+        },
+        responses: {
+          200: {
+            description: "Success",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
 
+        },
+      },
+      get: {
+        tags: ["Customer"],
+        summary: "Get Enquiries",
+        security: [
+          {
+            BearerAuth: [],
+          },
+        ],
+        responses: {
+          200: {
+            description: "Success",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+
+        },
+      },
+    },
+    "/api/restaurant/enquiry": {
+
+      get: {
+        tags: ["Restaurant"],
+        summary: "Get Enquiries",
+        security: [
+          {
+            BearerAuth: [],
+          },
+        ],
+        responses: {
+          200: {
+            description: "Success",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+
+        },
+      },
+    },
+
+    "/api/restaurant/enquiry/status/{id}": {
+      put: {
+        tags: ["Restaurant"],
+        summary: "Update Enquiry Status",
+        security: [
+          {
+            BearerAuth: [],
+          },
+        ],
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        requestBody: {
+          content: {
+            "application/json": {
+              schema:
+                updateEnquiryStatusSchema
+            },
+          },
+        },
+        responses: {
+          200: {
+            description: "Success",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+
+        },
+      },
+    },
   },
+
+
 });
 
 export default openApiSpec;
