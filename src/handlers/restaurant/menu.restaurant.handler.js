@@ -65,3 +65,18 @@ export const getMenuByRestaurantId = BigPromise(async (req, res) => {
     const menu = await Menu.find({ restaurant_id });
     ControllerResponse(res, 200, menu);
 });
+// Rate menu
+export const rateMenu = BigPromise(async (req, res) => {
+    const { id } = req.params;
+    const { rating } = req.body;
+
+    const menu = await Menu.findById(id);
+    if (!menu) {
+        return ErrorHandler(res, "Menu not found", 404);
+    }
+    menu.ratings.push({ customer_id: req.user._id, score: rating });
+    await menu.save();
+
+    ControllerResponse(res, 200, menu);
+}
+);

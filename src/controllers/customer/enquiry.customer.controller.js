@@ -3,7 +3,7 @@ import {
     getEnquiriesByCustomer,
     getEnquiryById,
     createEnquiry,
-    updateEnquiryStatus
+    updateEnquiryStatus,
 } from "../../handlers/restaurant/enquiry.restaurant.handler.js";
 import { addEnquirySchema } from "../../validations/restaurant/enquiry.restaurant.schema.js";
 import { validateRequest } from "zod-express-middleware";
