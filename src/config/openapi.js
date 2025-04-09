@@ -13,6 +13,7 @@ import {
   registerRestaurantSchema,
 } from "../validations/restaurant/auth.restaurant.schemas.js";
 import { addEnquirySchema, updateEnquiryStatusSchema } from "../validations/restaurant/enquiry.restaurant.schema.js";
+import { rateEnquirySchema } from "../validations/customer/menu.restaurant.schema.js";
 
 const openApiSpec = createDocument({
   openapi: "3.0.0",
@@ -645,7 +646,51 @@ const openApiSpec = createDocument({
         },
       },
     },
+    "/api/customer/menu/rate/{id}": {
+      put: {
+        tags: ["Customer"],
+        summary: "Rate Enquiry",
+        security: [
+          {
+            BearerAuth: [],
+          },
+        ],
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        requestBody: {
+          content: {
+            "application/json": {
+              schema: rateEnquirySchema
+            },
+          },
+        },
+        responses: {
+          200: {
+            description: "Success",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+
+        },
+      },
+    },
   },
+
 
 
 });

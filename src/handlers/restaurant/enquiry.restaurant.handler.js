@@ -72,4 +72,6 @@ export const updateEnquiryStatus = BigPromise(async (req, res) => {
     await enquiry.save();
     ControllerResponse(res, 200, enquiry);
 }
-);  
+);
+
+
