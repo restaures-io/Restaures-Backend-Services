@@ -78,6 +78,9 @@
     "zod-openapi": "^2.19.0"
   },
   "devDependencies": {
-    "@types/k6": "^1.0.2"
+    "@types/k6": "^1.0.2",
+    "@types/node": "^22.14.0",
+    "esbuild": "^0.25.2",
+    "k6-html-reporter": "^1.0.5"
   }
 }
